@@ -1,0 +1,60 @@
+<!-- PROJECT -->
+<project id="0">
+    <name></name>
+    <des></desc>
+    <tasks></tasks>
+</project>
+
+<!-- TASK -->
+<task id="0" name="">
+    <due_date></due_date>
+    <desc></desc>
+    <subtasks></subtasks>
+</task>
+
+<!-- DATE -->
+<due_date>
+    <year></year>
+    <month></month>
+    <day></day>
+    <time></time>
+</due_date>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- EXAMPLE -->
+<list>
+    <project id="1">
+        <name>BT</name>
+        <desc>Bachelors thesis tasks</desc>
+        <tasks>
+            <task id="1.0" name="Cell research">
+                <due_date>
+                    <year>2024</year>
+                    <month>02</month>
+                    <day>11</day>
+                    <time>12:00:00</time>
+                </due_date>    
+                <desc>Read research about cells</desc>
+                <subtasks>
+                    <task id="1.0.0" name="Research paper 1">
+                        <due_date>
+                            <year>2024</year>
+                            <month>02</month>
+                            <day>10</day>
+                            <time></time>
+                        </due_date>    
+                        <desc>Lehmann et al. 1999</desc>
+                        <subtasks></subtasks>
+                    </task>
+                    <task id="1.0.1" name="Research paper 2">
+                        <due_date></due_date>    
+                        <desc></desc>
+                        <subtasks>Forman, Beagle, 2012</subtasks>
+                    </task>
+                </subtasks>
+            </task>
+        </tasks>
+    </project>  
+</list>
