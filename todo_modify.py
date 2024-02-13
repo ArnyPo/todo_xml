@@ -107,9 +107,8 @@ class TodoListModify:
                 raise ValueError(f"No task nor project was under id:{id}")
         return element
     
-    def deleteElement(self, id:str):
-        element = self.findElement(self.root,id)
-        parent_id = self.getParentId(id)
+    def deleteElement(self, element:ET.Element):
+        parent_id = self.getParentId(element.get("id"))
         
         if parent_id is None:
             parent = self.root
@@ -133,4 +132,10 @@ class TodoListModify:
         status = task.find("status")
         status.text = new_status
         status.set("last_change", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    
+    def modifyTask(self, task:ET.Element, element:str, value:str):
+        to_modify = task.find(element)
+        if to_modify is None:
+            raise ValueError(f"Element {element} not found in task")
+        to_modify.text = value
         
