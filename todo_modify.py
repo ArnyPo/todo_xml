@@ -127,6 +127,10 @@ class TodoListModify:
         else:
             return ".".join(split_id[0:-1])
         
-    def updateStatus(self, task_id:str, status:str):
-        # TODO
-        pass
+    def updateStatus(self, task_id:str, new_status:str):
+        task = self.findElement(task_id)
+        
+        status = task.find("status")
+        status.text = new_status
+        status.set("last_change", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        

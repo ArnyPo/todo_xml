@@ -11,7 +11,7 @@
 					<task id="0.0.0" name="Leehman et al. 2023">
 						<due_date>00-00-00</due_date>
 						<desc>New task</desc>
-						<status last_change="2024-02-13 11:39:55">0</status>
+						<status last_change="2024-02-13 13:47:23">2</status>
 						<subtasks />
 					</task>
 				</subtasks>
@@ -23,5 +23,15 @@
 				<subtasks />
 			</task>
 		</tasks>
+	</project>
+	<project id="1">
+		<name>BC2</name>
+		<desc>Bachelor thesis</desc>
+		<tasks />
+	</project>
+	<project id="2">
+		<name>BC2</name>
+		<desc>Bachelor thesis</desc>
+		<tasks />
 	</project>
 </list>
