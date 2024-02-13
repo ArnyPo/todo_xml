@@ -6,55 +6,10 @@
 </project>
 
 <!-- TASK -->
+<!-- 0=not started, 1=in progress, 2=completed -->
 <task id="0" name="">
     <due_date></due_date>
     <desc></desc>
+    <status last_change="2024-01-01 00:00:00">0|1|2</status> 
     <subtasks></subtasks>
 </task>
-
-<!-- DATE -->
-<due_date>
-    <year></year>
-    <month></month>
-    <day></day>
-    <time></time>
-</due_date>
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!-- EXAMPLE -->
-<list>
-    <project id="1">
-        <name>BT</name>
-        <desc>Bachelors thesis tasks</desc>
-        <tasks>
-            <task id="1.0" name="Cell research">
-                <due_date>
-                    <year>2024</year>
-                    <month>02</month>
-                    <day>11</day>
-                    <time>12:00:00</time>
-                </due_date>    
-                <desc>Read research about cells</desc>
-                <subtasks>
-                    <task id="1.0.0" name="Research paper 1">
-                        <due_date>
-                            <year>2024</year>
-                            <month>02</month>
-                            <day>10</day>
-                            <time></time>
-                        </due_date>    
-                        <desc>Lehmann et al. 1999</desc>
-                        <subtasks></subtasks>
-                    </task>
-                    <task id="1.0.1" name="Research paper 2">
-                        <due_date></due_date>    
-                        <desc></desc>
-                        <subtasks>Forman, Beagle, 2012</subtasks>
-                    </task>
-                </subtasks>
-            </task>
-        </tasks>
-    </project>  
-</list>
