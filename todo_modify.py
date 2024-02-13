@@ -8,10 +8,21 @@ class TodoListModify:
         self.root:ET.ElementTree = self.tree.getroot()
     
     def writeToFile(self):
+        """CLosing method that writes all the changes done to the XML tree to the file
+        """
         ET.indent(self.tree, space="\t")
         self.tree.write(self.file)
         
     def newProject(self, project_name:str, project_desc:str="New project") -> str:
+        """Method creating a new Projcet element in the root
+
+        Args:
+            project_name (str): name of the project
+            project_desc (str, optional): project description. Defaults to "New project".
+
+        Returns:
+            str: id of the new project
+        """
         # root is the place where to add the project
         # generally right in the list
         new_id = self.getNewID(self.root,"project")
@@ -28,6 +39,20 @@ class TodoListModify:
         return new_id
     
     def newTask(self, root:ET.ElementTree, task_name:str, task_due:str="00-00-00", task_desc:str="New task") -> str:
+        """Method creating a new Task element in the specified position
+
+        Args:
+            root (ET.ElementTree): specification of the placement of the new task - project or task element
+            task_name (str): name of the task
+            task_due (str, optional): due date of the task in ISO format - YYYY-MM-DD hh:mm:ss. Defaults to "00-00-00".
+            task_desc (str, optional): description of the task. Defaults to "New task".
+
+        Raises:
+            Exception: if no tasks or subtasks elements were found under root
+
+        Returns:
+            str: id of the new task
+        """
         # root is project or task so that we can determine the starting id
         tasks = root.find("tasks")
         if tasks is None:
@@ -55,6 +80,16 @@ class TodoListModify:
         return new_id
 
     def getNewID(self, root:ET.Element, el_type:str) -> str:
+        """Method analysing the current layer of XML and determinig the new id that can be 
+        assigned to a new element. It finds the maximum of the existing ids and adds one
+
+        Args:
+            root (ET.Element): placement of the new element
+            el_type (str): element type - determines formating of the new id
+
+        Returns:
+            str: new id
+        """
         # look at the types that are on the same level
         # get the max id
         max_id = -1
@@ -99,6 +134,17 @@ class TodoListModify:
         return element
 
     def findElement(self, id:str) -> ET.Element:
+        """Method that finds the element (task or project) based on its id
+
+        Args:
+            id (str): id of the element to be found
+
+        Raises:
+            ValueError: if no element was found under the id
+
+        Returns:
+            ET.Element: found element
+        """
         # TODO redo into separate functions for tasks and projects
         element = self.root.find(f".//task[@id='{id}']")
         if element is None:
@@ -108,6 +154,11 @@ class TodoListModify:
         return element
     
     def deleteElement(self, element:ET.Element):
+        """Method that removes an element
+
+        Args:
+            element (ET.Element): element to be removed
+        """
         parent_id = self.getParentId(element.get("id"))
         
         if parent_id is None:
@@ -119,7 +170,17 @@ class TodoListModify:
             
         parent.remove(element)
         
-    def getParentId(self, id:str):
+    def getParentId(self, id:str) -> str:
+        """Method that analyses the id and returns the id of the parent. This means that it only 
+        removes the last number alongside with the dot - 1.4.2 -> 1.4. When there is only one number
+        it return None indicating that the root is the parent.
+
+        Args:
+            id (str): id of the element
+
+        Returns:
+            str: id of the parent, or None when root
+        """
         split_id = id.split(".")
         if len(split_id) == 1:
             return None
@@ -127,6 +188,13 @@ class TodoListModify:
             return ".".join(split_id[0:-1])
         
     def updateStatus(self, task_id:str, new_status:str):
+        """Updates the status based on the id of the task. It also modifies the "last change" 
+        attribute of the task to the current time.
+
+        Args:
+            task_id (str): id of the task
+            new_status (str): new status - 0|1|2
+        """
         task = self.findElement(task_id)
         
         status = task.find("status")
@@ -134,6 +202,17 @@ class TodoListModify:
         status.set("last_change", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
     def modifyTask(self, task:ET.Element, element:str, value:str):
+        """Modifies task element - either the due date of the description based on the input.
+
+        Args:
+            task (ET.Element): task to modify
+            element (str): element of the task to modify - due_date, desc
+            value (str): value to update the element with
+
+        Raises:
+            ValueError: _description_
+        """
+        # TODO date check
         to_modify = task.find(element)
         if to_modify is None:
             raise ValueError(f"Element {element} not found in task")

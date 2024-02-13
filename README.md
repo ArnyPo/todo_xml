@@ -18,7 +18,7 @@ The overall schema of the projects and tasks. The main identifier of each part i
     <subtasks></subtasks>
 </task>
 ```
-Tasks have a due date in the ISO format (the same format is used un status). A description is just a string. Status tracks changes and right now the thinking is that 0 indicates Not started, 1 In progress and 2 Done. Subtasks can have more tasks in them.
+Tasks have a due date in the ISO format (the same format is used in status). A description is just a string. Status tracks changes and right now the thinking is that 0 indicates Not started, 1 In progress and 2 Done. Subtasks can have more tasks in them.
 
 **Projects**
 ```xml
